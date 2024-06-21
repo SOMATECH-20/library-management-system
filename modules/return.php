@@ -1,0 +1,84 @@
+<?php
+include '../config/db.php';
+session_start();
+
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
+    header("Location: ../auth/login.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+$role = $_SESSION['role'];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $transaction_id = $_POST['transaction_id'];
+
+    $transaction_query = $conn->query("SELECT * FROM transactions WHERE id = $transaction_id");
+    $transaction = $transaction_query->fetch_assoc();
+
+    if (!$transaction) {
+        echo "Invalid transaction ID.";
+        exit();
+    }
+
+    $book_id = $transaction['BOOK_ID'];
+    $borrower_id = $transaction['USER_ID'];
+
+    if ($borrower_id == $user_id || $role == 'admin') {
+        $conn->query("INSERT INTO transactions (user_id, book_id, type) VALUES ($borrower_id, $book_id, 'return')");
+        $conn->query("DELETE FROM transactions WHERE id = $transaction_id");
+        $conn->query("UPDATE books SET available = TRUE WHERE id = $book_id");
+        header("Location: ../index.php");
+        exit();
+    } else {
+        echo "You are not authorized to return this book.";
+    }
+}
+
+if ($role == 'admin') {
+    $transactions = $conn->query("SELECT transactions.id, users.name, books.title FROM transactions 
+                                  JOIN users ON transactions.user_id = users.id 
+                                  JOIN books ON transactions.book_id = books.id 
+                                  WHERE transactions.type = 'borrow'");
+} else {
+    $transactions = $conn->query("SELECT transactions.id, users.name, books.title FROM transactions 
+                                  JOIN users ON transactions.user_id = users.id 
+                                  JOIN books ON transactions.book_id = books.id 
+                                  WHERE transactions.type = 'borrow' AND transactions.user_id = $user_id");
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Return Books</title>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="max-w-4xl w-full bg-white shadow-md rounded-lg p-8">
+        <div class="flex items-center mb-6">
+            <a href="../index.php" class="text-blue-500 hover:text-blue-700">
+                <i class="fas fa-backward"></i></i> Back
+            </a>
+            <h1 class="text-2xl font-bold ml-4">Return Book</h1>
+        </div>
+        <h1 class="text-2xl font-bold mb-6">Return Books</h1>
+        <form method="post">
+            <div class="mb-4">
+                <label for="transaction_id" class="block mb-2">Borrowed Book</label>
+                <select id="transaction_id" name="transaction_id" class="border px-4 py-2 w-full">
+                    <?php while ($row = $transactions->fetch_assoc()) : ?>
+                        <option value="<?php echo $row['id']; ?>"><?php echo $row['name'] . ' - ' . $row['title']; ?></option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 w-full"><i class="fas fa-arrow-left mr-2"></i>Return</button>
+        </form>
+    </div>
+</body>
+
+</html>
