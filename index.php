@@ -79,6 +79,7 @@ $visits_today = $visits_today_result->fetch_assoc()['visits_today'];
             <a href="modules/books.php" class="nav-link text-lg text-gray-700 hover:text-blue-600"><i class="fas fa-book mr-2"></i>Books</a>
             <a href="modules/borrow.php" class="nav-link text-lg text-gray-700 hover:text-blue-600"><i class="fas fa-arrow-right mr-2"></i>Borrow</a>
             <a href="modules/return.php" class="nav-link text-lg text-gray-700 hover:text-blue-600"><i class="fas fa-arrow-left mr-2"></i>Return</a>
+            <a href="modules/profile.php" class="nav-link text-lg text-gray-700 hover:text-blue-600"><i class="fas fa-arrow-left mr-2"></i>Profile</a>
             <?php if ($role == 'admin') : ?>
                 <a href="modules/users.php" class="nav-link text-lg text-gray-700 hover:text-blue-600"><i class="fas fa-users mr-2"></i>Users</a>
                 <a href="modules/add_book.php" class="nav-link text-lg text-gray-700 hover:text-blue-600"><i class="fas fa-plus mr-2"></i>Add Book</a>
