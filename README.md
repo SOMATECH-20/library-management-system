@@ -1,8 +1,15 @@
 # Library Management System
 
+![preview](assets/dashoard.png)
+
 This is a Library Management System developed in PHP and MySQL. The system allows for the management of books and users, with two main roles: Admin and User. 
 
 ## Features
+
+### Dashboard
+- **Header**: The dashboard title.
+- **Key Metrics**: The dashboard prominently displays key metrics, including the total number of users, books, and daily visits (transactions).
+- **Navigation Bar**: The dashboard features a user-friendly navigation bar positioned at the bottom for easy access. The navigation options dynamically adjust based on user roles (Admin or User) to ensure a streamlined experience.
 
 ### Admin
 - **Add Books**: Admins can add new books to the library.
@@ -27,7 +34,7 @@ This is a Library Management System developed in PHP and MySQL. The system allow
   - Import the lms.sql file located in the database folder into your MySQL database.
 3. **Configure the database connection**
 
-  - Update the database configuration in config.php:
+  - Update the database configuration in [db.php](config/db.php)
     ```php
     <?php
     $servername = "localhost";
