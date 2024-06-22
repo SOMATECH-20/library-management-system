@@ -68,6 +68,8 @@ This is a Library Management System developed in PHP and MySQL. The system allow
 ```arduino
 library-management-system/
 │
+├── assets/
+|
 ├── lms.sql
 │
 ├── modules/
