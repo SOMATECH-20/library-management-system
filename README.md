@@ -34,7 +34,7 @@ This is a Library Management System developed in PHP and MySQL. The system allow
   - Import the lms.sql file located in the database folder into your MySQL database.
 3. **Configure the database connection**
 
-  - Update the database configuration in [db.php](config/db.php)
+  - Update the database configuration in [`db.php`](config/db.php)
     ```php
     <?php
     $servername = "localhost";
@@ -94,10 +94,10 @@ library-management-system/
 ```
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [`LICENSE`](LICENSE) file for details.
 
 ## Acknowledgements
 - Thanks to the contributors and community for their support.
-- Icons by [Font Awesome](https://fontawesome.com/).
-- CSS framework by [Tailwind](https://tailwindcss.com/).
+- Icons by [`Font Awesome`](https://fontawesome.com/).
+- CSS framework by [`TailwindCSS`](https://tailwindcss.com/).
 Happy Coding!
