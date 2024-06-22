@@ -1,5 +1,4 @@
 <?php
-include '../includes/header.php';
 include '../config/db.php';
 
 session_start();
@@ -49,38 +48,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body class="bg-gray-100">
-    <nav class="bg-white p-4 shadow">
-        <div class="container mx-auto">
-            <a href="index.php" class="text-2xl font-bold text-blue-500">Library Management System</a>
-        </div>
-    </nav>
-
-
     <div class="container mx-auto mt-10">
         <div class="max-w-md mx-auto bg-white p-5 rounded-lg shadow-lg">
-            <h2 class="text-2xl font-bold mb-4">Profile</h2>
-            <?php if (isset($message)) : ?>
-                <div class="mb-4 p-2 bg-green-200 text-green-800 rounded"><?php echo $message; ?></div>
-            <?php endif; ?>
-            <form action="profile.php" method="POST">
-                <div class="mb-4">
-                    <label for="name" class="block text-gray-700">Name</label>
-                    <input type="text" name="name" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?php echo htmlspecialchars($user['NAME']); ?>" required>
+            <div class="max-w-md w-full bg-white shadow-md rounded-lg p-8">
+                <div class="flex items-center mb-6">
+                    <a href="../index.php" class="text-blue-500 hover:text-blue-700">
+                        <i class="fas fa-backward"></i></i> Back
+                    </a>
+                    <h1 class="text-2xl font-bold ml-4">Profile</h1>
                 </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-gray-700">Email</label>
-                    <input type="email" name="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?php echo htmlspecialchars($user['EMAIL']); ?>" required>
-                </div>
-                <div class="mb-4">
-                    <label for="password" class="block text-gray-700">Password <span class="text-sm text-gray-500">(Leave blank to keep current password)</span></label>
-                    <input type="password" name="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div class="flex items-center justify-between">
-                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700">Update Profile</button>
-                </div>
-            </form>
+                <?php if (isset($message)) : ?>
+                    <div class="mb-4 p-2 bg-green-200 text-green-800 rounded"><?php echo $message; ?></div>
+                <?php endif; ?>
+                <form action="profile.php" method="POST">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-700">Name</label>
+                        <input type="text" name="name" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?php echo htmlspecialchars($user['NAME']); ?>" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-700">Email</label>
+                        <input type="email" name="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?php echo htmlspecialchars($user['EMAIL']); ?>" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="block text-gray-700">Password <span class="text-sm text-gray-500">(Leave blank to keep current password)</span></label>
+                        <input type="password" name="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700">Update</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
 </body>
 
 </html>
