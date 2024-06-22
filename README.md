@@ -93,11 +93,11 @@ library-management-system/
 └── README.md
 ```
 
-License
+## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Acknowledgements
-Thanks to the contributors and community for their support.
-Icons by [Font%20Awesome](https://fontawesome.com/).
-CSS framework by [Tailwind](https://tailwindcss.com/).
+## Acknowledgements
+- Thanks to the contributors and community for their support.
+- Icons by [Font Awesome](https://fontawesome.com/).
+- CSS framework by [Tailwind](https://tailwindcss.com/).
 Happy Coding!
