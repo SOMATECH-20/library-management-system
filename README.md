@@ -100,4 +100,5 @@ This project is licensed under the MIT License - see the [`LICENSE`](LICENSE) fi
 - Thanks to the contributors and community for their support.
 - Icons by [`Font Awesome`](https://fontawesome.com/).
 - CSS framework by [`TailwindCSS`](https://tailwindcss.com/).
+#
 Happy Coding!
