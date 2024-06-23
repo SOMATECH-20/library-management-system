@@ -21,6 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Add User</title>
+    <style>
+        .password-toggle {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
@@ -41,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="email" id="email" name="email" class="border px-4 py-2 w-full" required>
             </div>
             <div class="mb-4">
-                <label for="pass" class="block mb-2"><i class="fas fa-lock"></i> Password</label>
+                <label for="pass" class="block mb-2"><i id="togglePassword" class="fas fa-lock password-toggle"></i> Password</label>
                 <input type="password" id="pass" name="pass" class="border px-4 py-2 w-full" required>
             </div>
             <div class="mb-4">
@@ -54,6 +59,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 w-full"><i class="fas fa-plus-circle"></i> Add</button>
         </form>
     </div>
+
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('pass');
+
+        togglePassword.addEventListener('click', function() {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
 </body>
 
 </html>

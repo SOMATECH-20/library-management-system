@@ -12,11 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
     $id = $_POST['id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $pin = $_POST['pass'];
+    $password = $_POST['password'];
     $role = $_POST['role'];
 
     $stmt = $conn->prepare("UPDATE users SET NAME = ?, EMAIL = ?, password = ?, role = ? WHERE ID = ?");
-    $stmt->bind_param("sssii", $name, $email, $pin, $role, $id);
+    $stmt->bind_param("ssssi", $name, $email, $password, $role, $id);
     $stmt->execute();
     header("Location: users.php");
     exit();
@@ -38,23 +38,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
 
         .input-icon i {
             position: absolute;
-            left: 10px;
+            left: 0.75rem;
             top: 70%;
             transform: translateY(-50%);
             color: #aaa;
         }
 
-        .input-icon input {
-            padding-left: 36px;
+        .input-icon input,
+        .input-icon select {
+            padding-left: 2.5rem;
         }
 
         .password-toggle {
             position: absolute;
-            right: 10px;
+            right: 0.75rem;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
             color: #aaa;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: transparent;
+            ring: 0;
         }
     </style>
 </head>
@@ -73,32 +82,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
             <div class="mb-4 input-icon">
                 <label for="name" class="block mb-2">Name</label>
                 <i class="fas fa-user"></i>
-                <input type="text" id="name" name="name" class="border px-4 py-2 w-full" value="<?php echo htmlspecialchars($user['NAME']); ?>" required>
+                <input type="text" id="name" name="name" class="border rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?php echo htmlspecialchars($user['NAME']); ?>" required>
             </div>
 
             <div class="mb-4 input-icon">
                 <label for="email" class="block mb-2">Email</label>
                 <i class="fas fa-envelope"></i>
-                <input type="email" id="email" name="email" class="border px-4 py-2 w-full" value="<?php echo htmlspecialchars($user['EMAIL']); ?>" required>
+                <input type="email" id="email" name="email" class="border rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?php echo htmlspecialchars($user['EMAIL']); ?>" required>
             </div>
 
             <div class="mb-4 input-icon">
-                <label for="password" class="block mb-2">New Password</label> <!-- Descriptive label -->
+                <label for="password" class="block mb-2">Password</label>
                 <i class="fas fa-lock"></i>
-                <input type="password" id="password" name="password" class="border px-4 py-2 w-full" value="<?php echo htmlspecialchars($user['password']); ?>" required>
+                <input type="password" id="password" name="password" class="border rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?php echo htmlspecialchars($user['password']); ?>" required>
                 <i class="fas fa-eye password-toggle" id="togglePassword"></i>
             </div>
 
             <div class="mb-4 input-icon">
                 <label for="role" class="block mb-2">Role</label>
                 <i class="fas fa-user-tag"></i>
-                <select id="role" name="role" class="border px-4 py-2 w-full" required>
-                    <option id="opt" value="user" <?php echo $user['role'] === 'user' ? 'selected' : ''; ?>>User</option>
-                    <option id="opt" value="admin" <?php echo $user['role'] === 'admin' ? 'selected' : ''; ?>>Admin</option>
+                <select id="role" name="role" class="border rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="user" <?php echo $user['role'] === 'user' ? 'selected' : ''; ?>>User</option>
+                    <option value="admin" <?php echo $user['role'] === 'admin' ? 'selected' : ''; ?>>Admin</option>
                 </select>
             </div>
 
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 w-full">Update</button>
+            <button type="submit" class="bg-blue-500 text-white rounded px-4 py-2 w-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Update</button>
         </form>
     </div>
 

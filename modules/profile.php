@@ -20,9 +20,9 @@ $user = $result->fetch_assoc();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = !empty($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : $user['PASSWORD'];
+    $password = !empty($_POST['password']) ? $_POST['password'] : $user['password'];
 
-    $query = "UPDATE USERS SET NAME = ?, EMAIL = ?, PASSWORD = ? WHERE ID = ?";
+    $query = "UPDATE USERS SET NAME = ?, EMAIL = ?, password = ? WHERE ID = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param('sssi', $name, $email, $password, $user_id);
 
@@ -30,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $message = "Profile updated successfully.";
         $user['NAME'] = $name;
         $user['EMAIL'] = $email;
+
+        header('Location: ../index.php');
     } else {
         $message = "Error updating profile.";
     }

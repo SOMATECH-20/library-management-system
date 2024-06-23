@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 w-full"><i class="fas fa-sign-in-alt"></i> Login</button>
         </form>
         <footer class="mt-4">
-            <a class="text-indigo-700 hover:text-pink-700 text-sm float-right" href="add_user.php"><i class="fas fa-user-plus"></i> Create Account</a>
+            <a class="text-indigo-700 hover:text-pink-700 text-sm float-right" href="../modules/add_user.php"><i class="fas fa-user-plus"></i> Create Account</a>
         </footer>
     </div>
 </body>
